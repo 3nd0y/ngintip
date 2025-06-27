@@ -1,2 +1,2 @@
 # ngintip
-com.cerahfamily.ngintip
+com.cf.ngintip
