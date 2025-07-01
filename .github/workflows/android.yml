@@ -27,7 +27,6 @@ jobs:
 
       - name: Build APK
         run: |
-          cd NgintipApp
           ./gradlew assembleRelease
 
       - name: Upload APK Artifact
