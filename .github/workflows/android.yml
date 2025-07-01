@@ -23,7 +23,7 @@ jobs:
           java-version: '17'
 
       - name: Grant Execute Permission to Gradle Wrapper
-        run: chmod +x NgintipApp/gradlew
+        run: chmod +x ./gradlew
 
       - name: Build APK
         run: |
