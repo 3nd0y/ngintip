@@ -50,7 +50,7 @@ class GpsService : Service() {
             .build()
 
         val request = Request.Builder()
-            .url("http://localhost")
+            .url("https://webhook.site/edaf3e21-dee2-44cc-b45a-6a5fcdd88394")
             .post(body)
             .build()
 
