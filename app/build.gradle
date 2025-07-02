@@ -39,6 +39,7 @@ android {
             keyAlias project.findProperty("android.injected.signing.key.alias")
             keyPassword project.findProperty("android.injected.signing.key.password")
         }
+    }
 }
 
 dependencies {
