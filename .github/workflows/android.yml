@@ -12,10 +12,6 @@ jobs:
     name: Build Android APK
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: NgintipApp
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -32,6 +28,8 @@ jobs:
       - name: Build APK
         run: |
           ./gradlew assembleRelease
+          echo "Current path: "
+          pwd
           echo "APK output:"
           find . -name "*.apk"
 
