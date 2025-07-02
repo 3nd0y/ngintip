@@ -7,9 +7,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:label="Ngintip"
         android:icon="@mipmap/ic_launcher"
+	android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         
         <service
