@@ -1,0 +1,56 @@
+name: Build & Sign APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: NgintipApp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Generate temporary keystore
+        run: |
+          keytool -genkeypair -v \
+            -keystore keystore.jks \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -alias tempkey \
+            -storepass password \
+            -keypass password \
+            -dname "CN=Ngintip, OU=Dev, O=fc, L=Jakarta, S=ID, C=ID"
+
+      - name: Build Signed Release APK
+        run: |
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file=keystore.jks \
+            -Pandroid.injected.signing.store.password=password \
+            -Pandroid.injected.signing.key.alias=tempkey \
+            -Pandroid.injected.signing.key.password=password
+
+      - name: Find APK
+        run: find app/build/outputs -name "*.apk"
+
+      - name: Upload Signed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: NgintipApp-Signed
+          path: app/build/outputs/apk/release/app-release.apk
