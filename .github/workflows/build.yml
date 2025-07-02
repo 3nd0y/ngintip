@@ -25,7 +25,7 @@ jobs:
       - name: Generate temporary keystore
         run: |
           keytool -genkeypair -v \
-            -keystore keystore.jks \
+            -keystore app/keystore.jks \
             -keyalg RSA \
             -keysize 2048 \
             -validity 10000 \
@@ -37,7 +37,7 @@ jobs:
       - name: Build Signed Release APK
         run: |
           ./gradlew assembleRelease \
-            -Pandroid.injected.signing.store.file=keystore.jks \
+            -Pandroid.injected.signing.store.file=app/keystore.jks \
             -Pandroid.injected.signing.store.password=password \
             -Pandroid.injected.signing.key.alias=tempkey \
             -Pandroid.injected.signing.key.password=password
